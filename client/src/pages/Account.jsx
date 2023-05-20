@@ -1,16 +1,24 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
 import { Link, Navigate, useParams } from "react-router-dom";
 import img from "../assets/images.jpeg"
+import  axios  from "axios";
 
-export default function IndexPage() { 
-    const {ready,user} = useContext(UserContext);
+export default function Account() { 
+  const [redirect, setRedirect] = useState(null);
+    const {ready,user,setUser} = useContext(UserContext);
 
     let {subpage} = useParams();
     if(subpage == undefined) {
       subpage = 'profile';
     }
-    if(ready && !user) {
+
+    async function Logout(){
+      await axios.post('/logout');
+      setRedirect('/');
+      setUser(null);
+    }
+    if(ready && !user && !redirect) {
         return <Navigate to = {'/login'} />
     }
 
@@ -24,6 +32,9 @@ export default function IndexPage() {
     return classes;
     }
     
+    if(redirect){
+      return <Navigate to = {redirect} />
+    }
 
   return (
     <div>
@@ -38,10 +49,10 @@ export default function IndexPage() {
          <div className="text-center mt-10">
          Logged in as <br />
          <div className="text-2xl ">
-         Name : {user.name} <br />
-         Email ID : {user.email}<br />
+         Name : {user?.name} <br />
+         Email ID : {user?.email}<br />
          </div>
-         <button className="bg-primary p-2 mt-2 rounded-md">Logout</button>
+         <button onClick={Logout} className="bg-primary p-2 mt-2 rounded-md">Logout</button>
          </div>
     </div>
    )}
