@@ -25,9 +25,6 @@ app.get('/test', (req, res) => {
 });
 
 
-
-
-
 app.post('/register', async (req,res) => {
   const {name, email,password} = req.body;
 try {
@@ -41,8 +38,6 @@ try {
   res.status(422).json(e);
 }
 });
-
-
 
 
 app.post('/login', async (req,res) => {
@@ -66,7 +61,6 @@ app.post('/login', async (req,res) => {
 });
 
 
-
 app.get('/profile', (req,res) => {
   const {token} = req.cookies;
   if (token) {
@@ -80,6 +74,4 @@ app.get('/profile', (req,res) => {
 });
 
 
-
 app.listen(4000);
-//4gk9pRdGhFYfdCFu
