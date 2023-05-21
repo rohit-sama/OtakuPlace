@@ -3,6 +3,7 @@ import { UserContext } from "../UserContext";
 import { Link, Navigate, useParams } from "react-router-dom";
 import img from "../assets/images.jpeg"
 import  axios  from "axios";
+import PlacesPage from "./PlacesPage.jsx";
 
 export default function Account() { 
   const [redirect, setRedirect] = useState(null);
@@ -56,6 +57,10 @@ export default function Account() {
          </div>
     </div>
    )}
+   {subpage === 'places' && (
+    <PlacesPage />
+   )}
+
    </div>
    
   );
