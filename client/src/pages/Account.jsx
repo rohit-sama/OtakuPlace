@@ -41,8 +41,8 @@ export default function Account() {
     <div>
    <nav className="w-full flex mt-8 justify-center gap-4">
     <Link className={LinkClasses('profile')} to ={'/account'} >My Profile</Link>
-    <Link className={LinkClasses('bookings')} to ={'/account/bookings'} >My Bookings</Link>
-    <Link className={LinkClasses('places')}  to ={'/account/places'} >My Accomodations</Link>
+    <Link className={LinkClasses('saved')} to ={'/account/saved'} >Saved Places</Link>
+    <Link className={LinkClasses('places')}  to ={'/account/places'} >Your Places</Link>
    </nav>
    {subpage === 'profile' && (
     <div className=" p-6 rounded-md mt-40 flex justify-center gap-4">

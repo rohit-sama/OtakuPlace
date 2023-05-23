@@ -13,9 +13,9 @@ export default function Header(){
 <span className='font-bold text-xl' >OtakuPlace</span>
     </a>
     <div className='flex border border-gray-300 rounded-full py-2 px-4 gap-5 shadow-md shadow-gray-300 items-center '>
-    <div>Anywhere</div>
+    <div>Anime Name</div>
     <div className = 'border-l border-gray-300'></div>
-    <div>Any Week</div>
+    <div>Place Name</div>
     <div className = 'border-l border-gray-300'></div>
     <div>Add Guest</div>
     <button className='bg-primary text-white p-2 rounded-full'>
