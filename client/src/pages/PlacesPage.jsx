@@ -19,7 +19,25 @@ export default function PlacesPage() {
        });
        setPhotolink('');
     };
-    return(
+
+    function uploadPhoto(ev){
+        const files = ev.target.files;
+        const data = new FormData();
+        for (let i = 0; i < files.length; i++){
+            data.append('photos', files[i]);
+        }
+        axios.post('/upload' , data,{
+            headers : {'Content-type' : 'multipart/form-data'}
+        }).then(response => {
+            const {data:datas} = response;
+            setAddedphoto(prev => {
+                return [...prev, ...datas]; 
+               });
+        });
+    }
+
+
+    return (
         <div>
             {action !== 'new' &&(
                 <div className="text-center mt-8">
@@ -58,8 +76,8 @@ export default function PlacesPage() {
                             <img className="rounded-2xl mt-3" src= {"http://localhost:4000/uploads/" + link} alt="" />
                         </div>
                     ))}
-                    <label className="border p-8 mt-3 bg-transparent flex items-center justify-center rounded-2xl ">Upload from local
-                    <input type="file" className="hidden cursor-pointer"/></label>
+                    <label className="border p-8 mt-3 bg-transparent flex cursor-pointer items-center justify-center rounded-2xl ">Upload from local
+                    <input type="file" multiple className="hidden" onChange={uploadPhoto}/></label>
                     </div>
 
                     <h2 className="text-2xl mt-3">Description</h2>
