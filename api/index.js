@@ -44,25 +44,69 @@ try {
 });
 
 
-app.post('/login', async (req,res) => {
-  const {email,password} = req.body;
-  const user =  await User.findOne({email});
+// app.post('/login', async (req,res) => {
+//   const {email,password} = req.body;
+//   const user =  await User.findOne({email});
 
- if(user) {
-  const passOk = bcrypt.compareSync(password, user.password);
-  if (passOk){
-    jwt.sign({email:user.email, id:user._id, name:user.name}, jwtsecret, {}, (err,token) => {
-      if (err) throw err;
-      res.cookie('token', token).json(user);
+  
+//  if(user) {
+//   const passOk = bcrypt.compareSync(password, user.password);
+//   if (passOk){
+//     jwt.sign({email:user.email, id:user._id, name:user.name}, jwtsecret, {}, (err,token) => {
+//       if (err) throw err;
+//       res.cookie('token', token).json(user);
 
-    });
-  }else{
-    res.status(422).json("password incorrect")
+//     });
+//   }else{
+//     res.status(422).json("password incorrect")
+//   }
+//  }else{
+//   res.json('not found')
+//  }
+// });
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  
+  // Validate email and password inputs
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password are required.' });
   }
- }else{
-  res.json('not found')
- }
+  
+  try {
+    const user = await User.findOne({ email });
+    
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+    
+    // Compare passwords
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    
+    if (isPasswordValid) {
+      // Generate JWT token
+      jwt.sign(
+        { email: user.email, id: user._id, name: user.name },
+        jwtsecret,
+        {},
+        (err, token) => {
+          if (err) {
+            throw err;
+          }
+          
+          // Set token as a cookie and return user information
+          res.cookie('token', token).json(user);
+        }
+      );
+    } else {
+      return res.status(401).json({ error: 'Incorrect password.' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
 });
+
 
 
 app.get('/profile', (req,res) => {
