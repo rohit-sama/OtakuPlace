@@ -1,67 +1,55 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../UserContext";
-import { Link, Navigate, useParams } from "react-router-dom";
-import img from "../assets/images.jpeg"
-import  axios  from "axios";
+import { Navigate, useParams } from "react-router-dom";
+import img from "../assets/images.jpeg";
+import axios from "axios";
 import PlacesPage from "./PlacesPage.jsx";
+import AccountNav from "../AccountNav";
 
-export default function Account() { 
+export default function Account() {
   const [redirect, setRedirect] = useState(null);
-    const {ready,user,setUser} = useContext(UserContext);
+  const { ready, user, setUser } = useContext(UserContext);
 
-    let {subpage} = useParams();
-    if(subpage == undefined) {
-      subpage = 'profile';
-    }
+  let { subpage } = useParams();
+  if (subpage == undefined) {
+    subpage = "profile";
+  }
 
-    async function Logout(){
-      await axios.post('/logout');
-      setRedirect('/');
-      setUser(null);
-    }
-    if(ready && !user && !redirect) {
-        return <Navigate to = {'/login'} />
-    }
+  async function Logout() {
+    await axios.post("/logout");
+    setRedirect("/");
+    setUser(null);
+  }
+  if (ready && !user && !redirect) {
+    return <Navigate to={"/login"} />;
+  }
 
-    
-
-    function LinkClasses (type=null) {
-      let classes = 'py-2 px-4';
-      if (type === subpage ) {
-      classes+= ' bg-primary text-white rounded-full';
-    }
-    return classes;
-    }
-    
-    if(redirect){
-      return <Navigate to = {redirect} />
-    }
+  if (redirect) {
+    return <Navigate to={redirect} />;
+  }
 
   return (
     <div>
-   <nav className="w-full flex mt-8 justify-center gap-4">
-    <Link className={LinkClasses('profile')} to ={'/account'} >My Profile</Link>
-    <Link className={LinkClasses('saved')} to ={'/account/saved'} >Saved Places</Link>
-    <Link className={LinkClasses('places')}  to ={'/account/places'} >Your Places</Link>
-   </nav>
-   {subpage === 'profile' && (
-    <div className=" p-6 rounded-md mt-40 flex justify-center gap-4">
-         <div><img className="rounded-md" src = {img} alt=""/></div>
-         <div className="text-center mt-10">
-         Logged in as <br />
-         <div className="text-2xl ">
-         Name : {user?.name} <br />
-         Email ID : {user?.email}<br />
-         </div>
-         <button onClick={Logout} className="bg-primary p-2 mt-2 rounded-md">Logout</button>
-         </div>
+      <AccountNav />
+      {subpage === "profile" && (
+        <div className=" p-6 rounded-md mt-40 flex justify-center gap-4">
+          <div>
+            <img className="rounded-md" src={img} alt="" />
+          </div>
+          <div className="text-center mt-10">
+            Logged in as <br />
+            <div className="text-2xl ">
+              Name : {user?.name} <br />
+              Email ID : {user?.email}
+              <br />
+            </div>
+            <button onClick={Logout} className="bg-primary p-2 mt-2 rounded-md">
+              Logout
+            </button>
+          </div>
+        </div>
+      )}
+      {subpage === "places" && <PlacesPage />}
     </div>
-   )}
-   {subpage === 'places' && (
-    <PlacesPage />
-   )}
-
-   </div>
-   
   );
 }

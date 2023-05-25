@@ -1,54 +1,53 @@
-const express = require('express');
-const cors = require('cors');
-const { default: mongoose } = require('mongoose');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('./models/User.js');
-const cookieParser = require('cookie-parser');
-const multer = require('multer');
-const imageDownloader = require('image-downloader');
-const fs = require('fs')
-require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
+const { default: mongoose } = require("mongoose");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const User = require("./models/User.js");
+const Place = require("./models/Place.js");
+const cookieParser = require("cookie-parser");
+const multer = require("multer");
+const imageDownloader = require("image-downloader");
+const fs = require("fs");
+require("dotenv").config();
 const app = express();
 
 const secretpass = bcrypt.genSaltSync(10);
-const jwtsecret = 'dfsgtrhthghgfnbvcbc';
+const jwtsecret = "dfsgtrhthghgfnbvcbc";
 
 app.use(express.json());
 app.use(cookieParser());
-app.use('/uploads' , express.static(__dirname + '/uploads'));
-app.use(cors({
-  credentials: true,
-  origin: 'http://localhost:5173',
-}));
+app.use("/uploads", express.static(__dirname + "/uploads"));
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:5173",
+  })
+);
 
 mongoose.connect(process.env.MONGO_URL);
-console.log('fsa')
-app.get('/test', (req, res) => {
-  res.json('test ok');
+app.get("/test", (req, res) => {
+  res.json("test ok");
 });
 
-
-app.post('/register', async (req,res) => {
-  const {name, email,password} = req.body;
-try {
-  const user = await User.create({
-    name,
-    email,
-    password:bcrypt.hashSync(password, secretpass),
-  });
-  res.json(user);
-} catch (e) {
-  res.status(422).json(e);
-}
+app.post("/register", async (req, res) => {
+  const { name, email, password } = req.body;
+  try {
+    const user = await User.create({
+      name,
+      email,
+      password: bcrypt.hashSync(password, secretpass),
+    });
+    res.json(user);
+  } catch (e) {
+    res.status(422).json(e);
+  }
 });
-
 
 // app.post('/login', async (req,res) => {
 //   const {email,password} = req.body;
 //   const user =  await User.findOne({email});
 
-  
 //  if(user) {
 //   const passOk = bcrypt.compareSync(password, user.password);
 //   if (passOk){
@@ -64,27 +63,24 @@ try {
 //   res.json('not found')
 //  }
 // });
-app.post('/login', async (req, res) => {
+
+app.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  
-  // Validate email and password inputs
+
   if (!email || !password) {
-    return res.status(400).json({ error: 'Email and password are required.' });
+    return res.status(400).json({ error: "Email and password are required." });
   }
-  
+
   try {
     const user = await User.findOne({ email });
-    
-    // Check if user exists
+
     if (!user) {
-      return res.status(404).json({ error: 'User not found.' });
+      return res.status(404).json({ error: "User not found." });
     }
-    
-    // Compare passwords
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
-    
+
     if (isPasswordValid) {
-      // Generate JWT token
       jwt.sign(
         { email: user.email, id: user._id, name: user.name },
         jwtsecret,
@@ -93,59 +89,74 @@ app.post('/login', async (req, res) => {
           if (err) {
             throw err;
           }
-          
-          // Set token as a cookie and return user information
-          res.cookie('token', token).json(user);
+
+          res.cookie("token", token).json(user);
         }
       );
     } else {
-      return res.status(401).json({ error: 'Incorrect password.' });
+      return res.status(401).json({ error: "Incorrect password." });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error.' });
+    res.status(500).json({ error: "Internal server error." });
   }
 });
 
-
-
-app.get('/profile', (req,res) => {
-  const {token} = req.cookies;
+app.get("/profile", (req, res) => {
+  const { token } = req.cookies;
   if (token) {
-    jwt.verify(token, jwtsecret, {} ,(err, user) => {
+    jwt.verify(token, jwtsecret, {}, (err, user) => {
       if (err) throw err;
-      res.json(user)
+      res.json(user);
     });
   } else {
-    res.json(null);
+    res.json("error finding the user");
   }
 });
 
-app.post('/logout' , (req,res) => {
-  res.cookie('token', '').json(true);
+app.post("/logout", (req, res) => {
+  res.cookie("token", "").json(true);
 });
 
-app.post('/upload-by-link' , async (req,res) => {
-  const {link} = req.body;
-  const newname = 'photo' + Date.now() + '.jpg';
+app.post("/upload-by-link", async (req, res) => {
+  const { link } = req.body;
+  const newname = "photo" + Date.now() + ".jpg";
   await imageDownloader.image({
     url: link,
-    dest : (__dirname+ '/uploads/') + newname,
-    });
-res.json(newname)
+    dest: __dirname + "/uploads/" + newname,
+  });
+  res.json(newname);
 });
 
-const photoUpload = multer({ dest: 'uploads' });
-app.post('/upload', photoUpload.array('photos', 100), (req,res) => {
+const photoUpload = multer({ dest: "uploads" });
+app.post("/upload", photoUpload.array("photos", 100), (req, res) => {
   const uploadedfiles = [];
-  for ( let i = 0; i < req.files.length; i++){
-    const {path , originalname} = req.files[i];
-    const parts = originalname.split('.')
-    const ext = parts[parts.length-1];
+  for (let i = 0; i < req.files.length; i++) {
+    const { path, originalname } = req.files[i];
+    const parts = originalname.split(".");
+    const ext = parts[parts.length - 1];
     const newpath = path + "." + ext;
-    fs.renameSync(path,newpath);
-    uploadedfiles.push(newpath.replace('uploads/', ''));
-  };
-res.json(uploadedfiles);
+    fs.renameSync(path, newpath);
+    uploadedfiles.push(newpath.replace("uploads/", ""));
+  }
+  res.json(uploadedfiles);
 });
+
+app.post("/places", (req, res) => {
+  const { token } = req.cookies;
+  const { title, address, addedphoto, description, extrainfo } = req.body;
+  jwt.verify(token, jwtsecret, {}, async (err, user) => {
+    if (err) throw err;
+    const placeDoc = await Place.create({
+      owner: user.id,
+      title,
+      address,
+      addedphoto,
+      description,
+      extrainfo,
+    });
+    res.json(placeDoc);
+  });
+});
+
 app.listen(4000);
