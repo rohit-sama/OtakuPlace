@@ -1,12 +1,14 @@
 import { Link, useParams } from "react-router-dom";
 import PlacesFormPage from "./PlacesForPage";
+import AccountNav from "../AccountNav";
 
 export default function PlacesPage() {
-  const { action } = useParams();
+
 
   return (
     <div>
-      {action !== "new" && (
+        <AccountNav/>
+     
         <div className="text-center mt-8">
           <Link
             className="bg-primary gap-1 inline-flex text-white py-3 px-6 rounded-md"
@@ -29,8 +31,7 @@ export default function PlacesPage() {
             ADD NEW PLACE
           </Link>
         </div>
-      )}
-      {action === "new" && <PlacesFormPage />}
+    
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import AccountNav from "../AccountNav";
+import { Navigate } from "react-router-dom";
 
 export default function PlacesFormPage() {
   const [title, setTitle] = useState("");
@@ -8,6 +10,7 @@ export default function PlacesFormPage() {
   const [photolink, setPhotolink] = useState("");
   const [description, setDescription] = useState("");
   const [extrainfo, setExtrainfo] = useState("");
+  const [redirect, setRedirect] = useState('');
 
   async function addPhotoByLink(ev) {
     ev.preventDefault();
@@ -46,10 +49,17 @@ export default function PlacesFormPage() {
       description,
       extrainfo,
     });
+    
+    setRedirect('/account/places');
+  }
+
+  if(redirect){
+   return <Navigate to={redirect}/>
   }
 
   return (
     <div>
+        <AccountNav/>
       <form onSubmit={addNewPlace} className="text-center">
         <h2 className="mt-8 text-2xl">Title</h2>
         <p className="text-gray-500 text-sm">
