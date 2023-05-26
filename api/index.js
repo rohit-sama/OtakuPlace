@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const imageDownloader = require("image-downloader");
 const fs = require("fs");
+const { Console } = require("console");
 require("dotenv").config();
 const app = express();
 
@@ -151,7 +152,7 @@ app.post("/places", (req, res) => {
       owner: user.id,
       title,
       address,
-      addedphoto,
+      photos:addedphoto,
       description,
       extrainfo,
     });
@@ -159,4 +160,28 @@ app.post("/places", (req, res) => {
   });
 });
 
+app.get('/allplaces', async(req, res) => {
+  try {
+    const places = await Place.find();
+    res.json(places);
+  } catch (error) {
+    console.error('Error retrieving places:', error);
+    res.sendStatus(500);
+  }
+});
+
+
+
+app.get('/places', (req,res) => {
+  const { token } = req.cookies;
+  jwt.verify(token, jwtsecret, {}, async (err, user) => {
+    const {id} = user;
+    res.json( await Place.find({owner:id}) );
+  });
+});
+
+app.get('/places/:id',async (req,res) => {
+  const {id} = req.params;
+  res.json(await Place.findById(id));
+})
 app.listen(4000);

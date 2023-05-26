@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AccountNav from "../AccountNav";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 export default function PlacesFormPage() {
+  const {id} = useParams();
   const [title, setTitle] = useState("");
   const [address, setAddress] = useState("");
   const [addedphoto, setAddedphoto] = useState("");
@@ -12,6 +13,19 @@ export default function PlacesFormPage() {
   const [extrainfo, setExtrainfo] = useState("");
   const [redirect, setRedirect] = useState('');
 
+  useEffect(() => {
+    if(!id){
+      return;
+    }
+    axios.get('/places/'+id).then(response => {
+      const {data} = response;
+      setTitle(data.title);
+      setAddress(data.address);
+      setAddedphoto(data.photos);
+      setDescription(data.description);
+      setExtrainfo(data.extrainfo);
+   });
+  }, [id]);
   async function addPhotoByLink(ev) {
     ev.preventDefault();
     const { data } = await axios.post("/upload-by-link", { link: photolink });
