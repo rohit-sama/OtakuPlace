@@ -32,11 +32,11 @@ export default function Account() {
     <div>
       <AccountNav />
       {subpage === "profile" && (
-        <div className=" p-6 rounded-md mt-40 flex justify-center gap-4">
+        <div className=" flex flex-wrap justify-center p-6 rounded-md mt-40  bg-gray-100  gap-4">
           <div>
             <img className="rounded-md" src={img} alt="" />
           </div>
-          <div className="text-center mt-10">
+          <div className=" mt-10">
             Logged in as <br />
             <div className="text-2xl ">
               Name : {user?.name} <br />

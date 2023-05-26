@@ -150,6 +150,7 @@ app.post("/places", (req, res) => {
     if (err) throw err;
     const placeDoc = await Place.create({
       owner: user.id,
+      ownername: user.name,
       title,
       address,
       photos:addedphoto,
@@ -176,9 +177,10 @@ app.get('/places', (req,res) => {
   const { token } = req.cookies;
   jwt.verify(token, jwtsecret, {}, async (err, user) => {
     const {id} = user;
-    res.json( await Place.find({owner:id}) );
+    res.json( await Place.find({owner:id}));
   });
 });
+
 
 app.get('/places/:id',async (req,res) => {
   const {id} = req.params;
