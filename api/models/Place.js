@@ -7,9 +7,8 @@ const PlaceSchema = new Schema({
     address : String,
     photos : [String],
     description : String,
-    extraInfo : String,
+    extrainfo : String,
 });
 
 const PlaceModel = mongoose.model('place', PlaceSchema);
-
 module.exports = PlaceModel;
