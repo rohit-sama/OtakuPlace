@@ -19,3 +19,9 @@ button.login {
   background-color: #ff385c;
   @apply p-2 w-full text-white rounded-2xl;
 }
+.bg-custom-background {
+  background-image: url("https://68.media.tumblr.com/58e04b9a1e9f5162ef2d1a0ace3c7221/tumblr_ojg1n3EPCG1w0ii2ho1_500.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}

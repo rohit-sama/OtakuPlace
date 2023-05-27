@@ -166,7 +166,6 @@ app.get('/allplaces', async(req, res) => {
     const places = await Place.find();
     res.json(places);
   } catch (error) {
-    console.error('Error retrieving places:', error);
     res.sendStatus(500);
   }
 });
