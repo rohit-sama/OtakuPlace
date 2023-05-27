@@ -5,47 +5,24 @@ import { useContext } from "react";
 export default function Header() {
   const { user } = useContext(UserContext);
   return (
-    <header className=" flex justify-between">
-      <Link to={'/'} className="flex items-center gap-1">
+    <header className="bg-gray-200 p-5 -m-4 flex mb-10 justify-between">
+      <Link to={"/"} className="flex items-center gap-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
+          strokeWidth="1.5"
           stroke="currentColor"
-          className="w-8 h-8"
+          className="w-6 h-6"
         >
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"
+            d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25"
           />
         </svg>
-        <span className="font-bold text-xl">OtakuPlace</span>
       </Link>
-      <div className="flex border border-gray-300 rounded-full py-2 px-4 gap-5 shadow-md shadow-gray-300 items-center ">
-        <div>Anime Name</div>
-        <div className="border-l border-gray-300"></div>
-        <div>Place Name</div>
-        <div className="border-l border-gray-300"></div>
-        <div>Add Guest</div>
-        <button className="bg-primary text-white p-2 rounded-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-4 h-4"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-            />
-          </svg>
-        </button>
-      </div>
+      <span className="font-bold flex items-center text-xl">OtakuPlace</span>
 
       <div className="flex border border-gray-300 rounded-full py-2 px-4 gap-4 shadow-md shadow-gray-300 items-center">
         <svg

@@ -32,7 +32,7 @@ export default function Account() {
     <div>
       <AccountNav />
       {subpage === "profile" && (
-        <div className=" flex flex-wrap justify-center p-6 rounded-md mt-40  bg-gray-100  gap-4">
+        <div className=" flex flex-wrap justify-center p-6 rounded-md mt-40 gap-4">
           <div>
             <img className="rounded-md" src={img} alt="" />
           </div>

@@ -14,7 +14,7 @@ export default function AccountNav() {
     return classes;
   }
   return (
-    <nav className="w-full flex mt-8 justify-center gap-4">
+    <nav className="w-full flex mt-2 justify-center gap-4">
       <Link className={LinkClasses("profile")} to={"/account"}>
         My Profile
       </Link>
