@@ -23,7 +23,6 @@ export default function LandingPage() {
         <h2 className="text-xl p-1 -mt-2 ">
           
           A Place where weebs can visit when they are finding places to travel
-          !!
         </h2> 
         </div>
       </div>

@@ -47,13 +47,13 @@ export default function placeInfo() {
           <h1 className="text-center font-bold mt-10 mb-5 text-3xl">
             Description:{" "}
           </h1>
-          <p className="p-10  rounded-xl ">{place.description}</p>
-          <h1 className="text-center font-bold mt-10 mb-5 text-3xl">
+          <p className="p-10 text-xl rounded-xl ">{place.description}</p>
+          <h1 className="text-center font-bold mt-5  text-3xl">
             ADDRESS
           </h1>
-          <p className="p-10 rounded-xl text-xl font-serif"><Link to={place.address}>{place.address}</Link></p>
-          <h1 className="text-center font-bold mt-10 mb-5 text-2xl flex justify-center items-center gap-2">
-            EXTRA INFO : <p className="p-10 rounded-xl text-xl font-serif">{place.extrainfo}</p>
+          <p className="p-6 hover:underline text-center mr-8 rounded-xl text-xl font-serif"><a href={place.address} rel="noreferrer" target="_blank">{place.address}</a></p>
+          <h1 className="text-center mt-10 hover:bg-gray-100 p-4 text-xl flex justify-center items-center gap-2">
+            EXTRA INFO : <p className="p-10 rounded-xl  text-xl font-serif">{place.extrainfo}</p>
           </h1>
           
         </>
