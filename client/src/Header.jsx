@@ -13,7 +13,7 @@ export default function Header() {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-6 mr-1 h-6"
         >
           <path
             strokeLinecap="round"
@@ -23,7 +23,37 @@ export default function Header() {
         </svg>
         HOME
       </Link>
-      <span className="font-bold flex items-center text-xl">OTAKUPLACE</span>
+      <span className="font-bold flex items-center text-xl">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
+          />
+        </svg>
+        OTAKUPLACE
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5"
+          />
+        </svg>
+      </span>
 
       <div className="flex border border-gray-500 rounded-full py-2 px-4 gap-4 shadow-md shadow-gray-300 items-center">
         <svg

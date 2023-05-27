@@ -49,19 +49,44 @@ export default function PlacesPage() {
         </Link>
       </div>
       <div className="p-5 mt-3">
-        {places.length > 0 && places.map((place) => (
-            <Link to={'/account/places/' + 
-            place._id} 
-            className="border cursor-pointer mt-4 p-3 flex gap-4 rounded-2xl bg-gray-200">
-              <div className="w-32  shrink-0 bg-gray-100 h-30">
+        {places.length > 0 &&
+          places.map((place) => (
+            <Link
+              to={"/account/places/" + place._id}
+              className="border cursor-pointer mt-4 p-3 flex gap-4 rounded-2xl bg-gray-200"
+            >
+              <div className=" shrink-0 flex justify-center items-center ">
                 {place.photos.length > 0 && (
-                  <img className="rounded-2xl max-h" src= {"http://localhost:4000/uploads/" + place.photos[1]} alt=""/>
+                  <img
+                    className="rounded-2xl h-[200px] w-[200px] max-h"
+                    src={"http://localhost:4000/uploads/" + place.photos[1]}
+                    alt=""
+                  />
                 )}
               </div>
               <div className="grow-0 ">
                 <h2 className="text-xl">{place.title} </h2>
-                <h2 className="text-l m-4">DESCRIPTION: {place.description} <br /></h2>
-                <h2>Shared by:- {place.ownername}</h2>
+                <h2 className="text-l m-4">
+                  DESCRIPTION: {place.description} <br />
+                </h2>
+                <div className="flex gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
+
+                  <h2>Shared by:- {place.ownername}</h2>
+                </div>
               </div>
             </Link>
           ))}

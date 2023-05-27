@@ -32,7 +32,7 @@ export default function IndexPage() {
     {places.length > 0 &&
       places.map((place) => (
         <Link to={"/places/" + place._id} className="p-4 hover:shadow-2xl shadow-lg border-2 rounded-2xl">
-          <div className="cursor-pointer p-3 max-w-xl bg-gray-100 rounded-2xl flex justify-center items-center">
+          <div className="cursor-pointer w-[400px] p-3 text-right bg-gray-100 rounded-2xl flex justify-between items-center">
           <div className="w-36 h-36">
             {place.photos.length > 0 && (
               <img
@@ -43,8 +43,8 @@ export default function IndexPage() {
             )}
           </div>
             <div>
-              <h2 className="text-xl m-5 ml-7 break-words">{place.title}</h2>
-              <div className="m-2 flex gap-3 justify-center">
+              <h2 className="text-xl text-right m-5 ml-7 break-words">{place.title}</h2>
+              <div className=" flex text-right gap-3 justify-center">
               <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -59,7 +59,7 @@ export default function IndexPage() {
                     d="M3 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062A1.125 1.125 0 013 16.81V8.688zM12.75 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062a1.125 1.125 0 01-1.683-.977V8.688z"
                   />
                 </svg>
-              <p className="font-bold">Shared by: {place.ownername} </p>
+              <p className=" text-right font-bold">Shared by: {place.ownername} </p>
               </div>
             </div>
           </div>
