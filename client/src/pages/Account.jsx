@@ -20,6 +20,7 @@ export default function Account() {
     setRedirect("/");
     setUser(null);
   }
+  
   if (ready && !user && !redirect) {
     return <Navigate to={"/login"} />;
   }
