@@ -81,6 +81,7 @@ export default function PlacesFormPage() {
         </p>
         <input
           type="text"
+          required
           value={title}
           onChange={(ev) => setTitle(ev.target.value)}
         />
@@ -90,6 +91,7 @@ export default function PlacesFormPage() {
           Address (Google Maps link Prefered)
         </p>
         <input
+        required
           type="text"
           value={address}
           onChange={(ev) => setAddress(ev.target.value)}
@@ -140,6 +142,7 @@ export default function PlacesFormPage() {
           detailed information about the place
         </p>
         <textarea
+        required
           value={description}
           onChange={(ev) => setDescription(ev.target.value)}
           className="h-40"
@@ -152,6 +155,7 @@ export default function PlacesFormPage() {
         </p>
         <input
           type="text"
+          required
           value={extrainfo}
           onChange={(ev) => setExtrainfo(ev.target.value)}
         />
