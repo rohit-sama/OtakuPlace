@@ -77,3 +77,9 @@ To run this project, you will need to add the following environment variables to
 
 'MONGO_URL = 'your mongodb url''
 
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+
