@@ -5,7 +5,8 @@ The only place you OTAKUS will ever need for travelling !!
 
 - A Place where weebs can visit when they are finding places to travel
 
-#SCREENSHOTS
+# SCREENSHOTS
+
 ![image](https://github.com/rohit-sama/OtakuPlace/assets/112627630/6fca32fc-eac1-4e7a-8f72-e582bdf2a228)
 ![image](https://github.com/rohit-sama/OtakuPlace/assets/112627630/200397ed-4b9e-41d6-b185-c904e0a61018)
 ![image](https://github.com/rohit-sama/OtakuPlace/assets/112627630/4c0680c5-7317-4e6c-95e0-afb0295185e0)
