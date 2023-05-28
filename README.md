@@ -25,21 +25,51 @@ This is a project i made by using the following technologies :
 
 ## Installation
 Try OtakuPlace with npm
-
-
 - Requirements : node should be installed on your system.
+
+
+## Run Locally
+
+Clone the project
 
 ```bash
   git clone https://github.com/rohit-sama/OtakuPlace.git
+```
+
+Go to the project directory
+
+```bash
   cd OtakuPlace
   cd api
-  npm i
-  nodemon index.js
+```
+
+Install dependencies
+
+```bash
+   npm i
+```
+Go to the project directory
+
+```bash
   cd ..
   cd client
-  npm i
-  npm run dev
 ```
+
+Install dependencies
+
+```bash
+   npm i
+```
+
+Start the server
+
+```bash
+  npm run dev
+  cd ..
+  cd api
+  nodemon index.js
+```
+
     
 ## Environment Variables
 
